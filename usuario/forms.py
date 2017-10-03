@@ -83,7 +83,7 @@ class UsuarioForm(forms.ModelForm):
     def clean_cedula(self):
         cedula = self.cleaned_data['cedula']
 
-        if User.objects.get(username=cedula):
+        if User.objects.filter(username=cedula):
             raise forms.ValidationError(_("Este usuario ya existe"))
 
         return cedula
