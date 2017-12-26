@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from .views import inicio
+from .views import InicioView
 
 urlpatterns = [
-    url(r'^$', inicio, name='inicio'),
+    url(r'^$', InicioView.as_view(), name='inicio'),
 ]

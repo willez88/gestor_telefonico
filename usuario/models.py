@@ -18,12 +18,14 @@ class Perfil(models.Model):
 
     user = models.OneToOneField(
         User, related_name="perfil",
-        help_text=_("Relación entre los datos de registro y el usuario con acceso al sistema")
+        help_text=_("Relación entre los datos de registro y el usuario con acceso al sistema"),
+        on_delete=models.CASCADE
     )
 
     users = models.ForeignKey(
         User, related_name="users",
-        help_text=_("Registra nuevos usuarios y los mantiene relacionados consigo mismo")
+        help_text=_("Registra nuevos usuarios y los mantiene relacionados consigo mismo"),
+        on_delete=models.CASCADE
     )
 
     class Meta:
