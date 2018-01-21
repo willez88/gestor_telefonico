@@ -5,3 +5,4 @@ gestor_telefonico/settings.py
 __pycache__
 migrations
 static/node_modules
+package-lock.json

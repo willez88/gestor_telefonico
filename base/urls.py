@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 from .views import InicioView
 
 urlpatterns = [
-    url(r'^$', InicioView.as_view(), name='inicio'),
+    path('', InicioView.as_view(), name='inicio'),
 ]

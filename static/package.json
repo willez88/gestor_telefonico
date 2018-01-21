@@ -2,7 +2,7 @@
     "name": "gestor_telefonico",
     "version": "0.0.1",
     "dependencies": {
-        "bootstrap": "",
+        "bootstrap": "3.3.7",
         "datatables.net": "",
         "datatables.net-bs": "",
         "datatables.net-autofill": "",
