@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from base.fields import CedulaField
+from django.core import validators
 
 class UsuarioForm(forms.ModelForm):
 
@@ -44,15 +45,21 @@ class UsuarioForm(forms.ModelForm):
 
     telefono = forms.CharField(
         label=_("Teléfono:"),
-        max_length=16,
+        max_length=15,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control input-sm', 'placeholder': '+058-000-0000000',
+                'class': 'form-control input-sm', 'placeholder': '+58-000-0000000',
                 'data-rule-required': 'true', 'data-toggle': 'tooltip', 'size': '15',
-                'title': _("Indique el número telefónico de contacto"), 'data-mask': '+000-000-0000000'
+                'title': _("Indique el número telefónico de contacto"), 'data-mask': '+00-000-0000000'
             }
         ),
-        help_text=_("(país)-área-número")
+        validators=[
+            validators.RegexValidator(
+                r'^\+\d{2}-\d{3}-\d{7}$',
+                _("Número telefónico inválido. Solo se permiten números y los símbolos: + -")
+            ),
+        ],
+        help_text=_("+58-416-0708340")
     )
 
     password = forms.CharField(

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from .models import Perfil
@@ -48,7 +48,13 @@ class UsuarioUpdate(UpdateView):
     model = User
     form_class = UsuarioUpdateForm
     template_name = "usuario.registro.html"
-    success_url = reverse_lazy('usuario_lista')
+    success_url = reverse_lazy('inicio')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.id == self.kwargs['pk']:
+            return super(UsuarioUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')
 
     def get_initial(self):
         datos_iniciales = super(UsuarioUpdate, self).get_initial()
@@ -78,7 +84,13 @@ class UsuarioUpdate(UpdateView):
         print(form.errors)
         return super(UsuarioUpdate, self).form_invalid(form)
 
-class UsuarioDelete(DeleteView):
+"""class UsuarioDelete(DeleteView):
     model = User
     template_name = "usuario.eliminar.html"
     success_url = reverse_lazy('usuario_lista')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.id == self.kwargs['pk']:
+            return super(UsuarioDelete, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')"""
